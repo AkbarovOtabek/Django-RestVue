@@ -1,0 +1,4 @@
+venv
+djackets_vue/node_modules
+djackets_vue/package-lock.json
+djackets_vue/package.json
