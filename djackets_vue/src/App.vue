@@ -89,6 +89,7 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("initializeSrote");
+    const token = this.$store.state.token;
   },
   mounted() {
     this.cart = this.$store.state.cart;
