@@ -1,6 +1,9 @@
 from pathlib import Path
+import environ, os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = 'django-insecure-(bkt(fg(z*tn0^eibrkfe69=i#4!o#*y#ek&5&5p_40g+u!0x('
 
@@ -8,6 +11,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STRIPE_SECRET_KEY=env('STRIPE_SECRET_KEY')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,7 +25,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'product',
-
+    'order.apps.OrderConfig',
 ]
 
 CORS_ALLOWED_ORIGINS =[

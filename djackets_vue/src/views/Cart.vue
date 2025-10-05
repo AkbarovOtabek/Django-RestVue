@@ -30,9 +30,16 @@
         <strong>${{ cartTotalPrice.toFixed(2) }}</strong
         >, {{ cartTotalLength }} items
         <hr />
-        <router-link to="/cart/checkout" class="button is-dark"
-          >Proceed to checkout</router-link
-        >
+        <template v-if="!$store.state.isAuthenticated">
+          <router-link to="/log-in/" class="button is-dark"
+            >Proceed to checkout</router-link
+          >
+        </template>
+        <template v-else>
+          <router-link to="/cart/checkout/" class="button is-dark"
+            >Proceed to checkout</router-link
+          >
+        </template>
       </div>
     </div>
   </div>
@@ -53,10 +60,12 @@ export default {
   mounted() {
     this.cart = this.$store.state.cart;
   },
-  methods:{
-    removeFromCart(item){
-      this.cart.items=this.cart.items.filter(i=>i.product.id!==item.product.id)
-    }
+  methods: {
+    removeFromCart(item) {
+      this.cart.items = this.cart.items.filter(
+        (i) => i.product.id !== item.product.id
+      );
+    },
   },
   computed: {
     cartTotalLength() {
@@ -70,6 +79,5 @@ export default {
       }, 0);
     },
   },
-  
 };
 </script>
